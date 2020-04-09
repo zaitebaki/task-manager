@@ -23,7 +23,26 @@ class Task extends Model
     {
         $startOffset = ($pageNumber - 1) * 3;
         $endOffset   = $startOffset + 3;
-        $sql         = $this->sqlQuery("SELECT * FROM tasks order by created_at LIMIT $startOffset, $endOffset");
+
+        $orderBy = "created_at";
+
+        if (isset($_SESSION['orderSort'])) {
+            switch ($_SESSION['orderSort']) {
+                case 'default':
+                    $orderBy = "created_at";
+                    break;
+                case 'name':
+                    $orderBy = "user_name";
+                    break;
+                case 'status':
+                    $orderBy = "done";
+                    break;
+                default:
+                    $orderBy = "created_at";
+                    break;
+            }
+        }
+        $sql = $this->sqlQuery("SELECT * FROM tasks order by $orderBy LIMIT $startOffset, $endOffset");
 
         $resultArray = [];
         if ($sql->num_rows > 0) {
@@ -39,10 +58,11 @@ class Task extends Model
         }
         return $resultArray;
     }
+
     /**
-     * Get tasks data from db.
+     * Get count tasks on db.
      *
-     * @return mixed
+     * @return int
      */
     public function getCountTasks(): int
     {

@@ -2,6 +2,12 @@
   <div class="container">
     <login-component />
     
+    <h2>Текущие задачи</h2>
+    <hr>
+    <sort-block-component 
+      :order-sort="propsData[0].orderSort"
+    />
+
     <task-list-component
       :tasks="propsData[0].tasks"
     />
@@ -9,9 +15,7 @@
       :count-tasks="propsData[0].countTasks"
       :page-number="+propsData[0].pageNumber"
     />
-    
     <add-task-component />
-    <sort-block-component />
   </div>
 </template>
 

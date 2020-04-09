@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h2>Текущие задачи</h2>
-    <hr>
     <div class="row">
       <div
         v-for="(task, index) in tasks"

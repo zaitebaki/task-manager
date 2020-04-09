@@ -9,13 +9,18 @@ class IndexController extends Controller
 {
     public function index($pageNumber = '1'): string
     {
-        $task = new Task;
 
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $this->updateSortStatus();
+        }
+
+        $task      = new Task;
         $propsData = [
             [
-                'tasks'       => $task->getTasks((int) $pageNumber),
+                'tasks'      => $task->getTasks((int) $pageNumber),
                 'countTasks' => $task->getCountTasks(),
-                'pageNumber' => $pageNumber
+                'pageNumber' => $pageNumber,
+                'orderSort'  => $this->getOrderSort(),
             ],
         ];
 
@@ -25,5 +30,23 @@ class IndexController extends Controller
     public function login(): string
     {
         return $this->view('login');
+    }
+
+    /**
+     * Update order sort status.
+     *
+     */
+    private function updateSortStatus()
+    {
+        $_SESSION["orderSort"] = $_POST["sortSelectedElement"];
+    }
+
+    /**
+     * Get current order sort status.
+     *
+     */
+    private function getOrderSort()
+    {
+        return $_SESSION["orderSort"] ?? 'default';
     }
 }
