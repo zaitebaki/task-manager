@@ -12,7 +12,7 @@ class Application
     public function sendResponse(): void
     {
         $route          = new Route();
-        $controllerData = $route->getControllerName();
+        $controllerData = $route->getControllerData();
 
         $controllerName = $controllerData['controllerName'];
         $parameter      = $controllerData['parameter'];

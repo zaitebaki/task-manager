@@ -4,10 +4,13 @@
     aria-label="Page navigation"
   >
     <ul class="pagination">
-      <li class="page-item">
+      <li
+        class="page-item"
+        :class="{disabled: pageNumber === 1}"
+      >
         <a
           class="page-link"
-          href="#"
+          :href="getPreviousLink()"
           aria-label="Previous"
         >
           <span aria-hidden="true">&laquo;</span>
@@ -16,20 +19,24 @@
       </li>
 
       <li
-        v-for="(page, index) in pageNumbers"
+        v-for="(page, index) in pageCount"
         :key="index"
         class="page-item"
+        :class="{active: pageNumber === index+1}"
       >
         <a
           class="page-link"
-          href="#"
+          :href="getLink(index+1)"
         >{{ index + 1 }}</a>
       </li>
 
-      <li class="page-item">
+      <li
+        class="page-item"
+        :class="{disabled: pageNumber === pageCount}"
+      >
         <a
           class="page-link"
-          href="#"
+          :href="getNextLink()"
           aria-label="Next"
         >
           <span aria-hidden="true">&raquo;</span>
@@ -46,20 +53,36 @@ export default {
     countTasks: {
       type: Number,
       default: 0,
-      },
+    },
+    pageNumber: {
+      type: Number,
+      default: 0,
+    },
   },
   data() {
     return {
-    }
+      pageLink: "http://task/page/"
+    };
   },
   computed: {
-    pageNumbers: function () {
+    pageCount: function () {
         return Math.trunc(this.countTasks / 3) + 1;
       }
   },
   mounted() {
-    console.log(this.pageNumbers);
-  }
+    console.log(this.pageCount);
+  },
+  methods: {
+    getLink(index) {
+      return this.pageLink + index;
+    },
+    getPreviousLink() {
+      return this.pageLink + (this.pageNumber - 1);
+    },
+    getNextLink() {
+      return this.pageLink + (this.pageNumber + 1);
+    }
+  },
 }
 </script>
 

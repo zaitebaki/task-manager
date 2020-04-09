@@ -19,9 +19,11 @@ class Task extends Model
      *
      * @return mixed
      */
-    public function getTasks()
+    public function getTasks(int $pageNumber): array
     {
-        $sql = $this->sqlQuery('SELECT * FROM tasks');
+        $startOffset = ($pageNumber - 1) * 3;
+        $endOffset   = $startOffset + 3;
+        $sql         = $this->sqlQuery("SELECT * FROM tasks order by created_at LIMIT $startOffset, $endOffset");
 
         $resultArray = [];
         if ($sql->num_rows > 0) {
@@ -36,5 +38,23 @@ class Task extends Model
             }
         }
         return $resultArray;
+    }
+    /**
+     * Get tasks data from db.
+     *
+     * @return mixed
+     */
+    public function getCountTasks(): int
+    {
+        $count = 0;
+        $sql   = $this->sqlQuery("SELECT COUNT(*) as count FROM tasks");
+
+        $resultArray = [];
+        if ($sql->num_rows > 0) {
+            while ($row = $sql->fetch_assoc()) {
+                $count = $row['count'];
+            }
+        }
+        return $count;
     }
 }

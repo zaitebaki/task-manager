@@ -7,12 +7,16 @@ use Core\Controller;
 
 class IndexController extends Controller
 {
-    public function index(): string
+    public function index($pageNumber = '1'): string
     {
         $task = new Task;
 
         $propsData = [
-            ['tasks' => $task->getTasks()],
+            [
+                'tasks'       => $task->getTasks((int) $pageNumber),
+                'countTasks' => $task->getCountTasks(),
+                'pageNumber' => $pageNumber
+            ],
         ];
 
         return $this->view('index', ['propsData' => $propsData]);

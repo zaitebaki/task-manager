@@ -5,10 +5,11 @@
     <task-list-component
       :tasks="propsData[0].tasks"
     />
-    <pagination-component 
-      v-if="propsData[0].tasks.length > 2"
-      :count-tasks="propsData[0].tasks.length"
+    <pagination-component
+      :count-tasks="propsData[0].countTasks"
+      :page-number="+propsData[0].pageNumber"
     />
+    
     <add-task-component />
     <sort-block-component />
   </div>

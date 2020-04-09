@@ -5,7 +5,7 @@ namespace App;
 class Route
 {
     /**
-     * Массив роутеров приложения, заданных в файл /routes.php
+     * Array of prepared routes in file /routes.php
      * @var array
      */
     private $routes;
@@ -19,10 +19,10 @@ class Route
     }
 
     /**
-     * Получить имя контроллера для обработки текущего роутера
+     * Get controller name and dynamic parameter for current route.
      * @return ?array
      */
-    public function getControllerName(): ?array
+    public function getControllerData(): ?array
     {
         $checkingArray          = $this->getRoutesForChecking();
         $outputControllerName   = null;
@@ -65,7 +65,7 @@ class Route
     }
 
     /**
-     * Get routes array from prepare file
+     * Get routes array from prepare file.
      * @return array
      * @desc
      * Array example:
