@@ -12,35 +12,69 @@ class Route
 
     public function __construct()
     {
-        $this->requestMethod = mb_strtolower($_SERVER['REQUEST_METHOD']);
-        $this->requestUri    = mb_strtolower($_SERVER['REQUEST_URI']);
-
+        $this->requestMethod     = mb_strtolower($_SERVER['REQUEST_METHOD']);
+        $this->requestUri        = mb_strtolower($_SERVER['REQUEST_URI']);
         $this->routes            = require_once '../routes/routes.php';
         $this->routesForChecking = $this->getRoutesForChecking();
     }
 
     /**
      * Получить имя контроллера для обработки текущего роутера
-     * @return ?string
+     * @return ?array
      */
-    public function getControllerName(): ?string
+    public function getControllerName(): ?array
     {
-        $checkingArray = $this->getRoutesForChecking();
-        $uriAndMethod  = $this->requestUri . '@' . $this->requestMethod;
+        $checkingArray          = $this->getRoutesForChecking();
+        $outputControllerName   = null;
+        $outputDynamicParameter = null;
 
-        if (isset($checkingArray[$uriAndMethod])) {
-            return $checkingArray[$uriAndMethod];
+        // get last uri piece: http://task/edit => edit
+        $pos              = strripos($this->requestUri, '/');
+        $cutClientUrl     = substr($this->requestUri, 0, $pos);
+        $dynamicParameter = substr($this->requestUri, $pos + 1);
+
+        for ($i = 0, $size = count($checkingArray); $i < $size; ++$i) {
+
+            $typeUrl        = $checkingArray[$i]['typeUrl'];
+            $url            = $checkingArray[$i]['url'];
+            $method         = $checkingArray[$i]['method'];
+            $controllerName = $checkingArray[$i]['controllerName'];
+
+            // check client uri on dynamic parameter
+            if ($typeUrl === 'dynamic') {
+                $pos           = strpos($url, "{");
+                $cutPrepareUrl = substr($url, 0, $pos - 1);
+
+                if ($cutClientUrl === $cutPrepareUrl && $method === $this->requestMethod) {
+                    return [
+                        'controllerName' => $controllerName,
+                        'parameter'      => $dynamicParameter,
+                    ];
+                }
+            }
+
+            // check client uri on non-dynamic parameter
+            if ($url === $this->requestUri && $method === $this->requestMethod) {
+                return [
+                    'controllerName' => $controllerName,
+                    'parameter'      => null,
+                ];
+            }
         }
         return null;
     }
 
     /**
-     * Получить массив роутеров, для которых определен контроллер
+     * Get routes array from prepare file
      * @return array
      * @desc
-     * Результирующий массив состоит из элементов вида
-     * '/@get': Home\IndexController@authenticate'
-     * '/authenticate@post': 'Home\IndexController@authenticate'
+     * Array example:
+     * [
+     *      'typeUrl' => 'dynamic',
+     *      'url' => '/edit/{num_task}',
+     *      'method' => 'post',
+     *      'controllerName' => 'Home\IndexController@edit'
+     * ]
      */
     private function getRoutesForChecking(): array
     {
@@ -52,10 +86,19 @@ class Route
             $method         = $routes[$i][1];
             $controllerName = $routes[$i][2];
 
-            $key   = $url . '@' . $method;
-            $value = $controllerName;
+            $typeDynamic = 'not_dynamic';
 
-            $resultArray[$key] = $value;
+            // check uri on dynamic parameters
+            $pos = strpos($url, "{");
+            if ($pos !== false) {
+                $typeDynamic = 'dynamic';
+            }
+            $resultArray[] = [
+                'typeUrl'        => $typeDynamic,
+                'url'            => $url,
+                'method'         => $method,
+                'controllerName' => $controllerName,
+            ];
         }
 
         return $resultArray;

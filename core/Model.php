@@ -44,9 +44,7 @@ abstract class Model
         $dbname     = "zaitebaki";
 
         $conn = new \mysqli($serverName, $username, $password, $dbname);
-
-        \var_dump($conn);
-
+        
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }

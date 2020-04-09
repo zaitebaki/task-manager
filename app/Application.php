@@ -12,7 +12,10 @@ class Application
     public function sendResponse(): void
     {
         $route          = new Route();
-        $controllerName = $route->getControllerName();
+        $controllerData = $route->getControllerName();
+
+        $controllerName = $controllerData['controllerName'];
+        $parameter      = $controllerData['parameter'];
 
         // отправить ошибку 404, если для текущего URI
         // контроллер не задан
@@ -28,7 +31,11 @@ class Application
         $fullClassName = "App\\Controllers\\$className";
         $controller    = new $fullClassName();
 
-        $response = $controller->$method();
+        if ($parameter !== null) {
+            $response = $controller->$method($parameter);
+        } else {
+            $response = $controller->$method();
+        }
 
         echo $response;
     }

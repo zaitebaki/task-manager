@@ -1,10 +1,16 @@
 <template>
-  <div>
+  <div class="container">
     <login-component />
+    
+    <task-list-component
+      :tasks="propsData[0].tasks"
+    />
+    <pagination-component 
+      v-if="propsData[0].tasks.length > 2"
+      :count-tasks="propsData[0].tasks.length"
+    />
     <add-task-component />
-    <task-list-component />
     <sort-block-component />
-    <pagination-component />
   </div>
 </template>
 
@@ -24,7 +30,7 @@ export default {
     'pagination-component': PaginationComponent
   },
 props: {
-        propsData: {
+    propsData: {
       type: Array,
       default: () => [],
         },

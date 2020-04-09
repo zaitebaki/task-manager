@@ -11,11 +11,9 @@ class IndexController extends Controller
     {
         $task = new Task;
 
-        $propsData = $task->getTasks();
-
-        // $propsData = [
-        //     ['test' => 'test from php']
-        // ];
+        $propsData = [
+            ['tasks' => $task->getTasks()],
+        ];
 
         return $this->view('index', ['propsData' => $propsData]);
     }
