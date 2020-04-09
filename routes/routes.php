@@ -2,5 +2,5 @@
 return
 $routes = [
     ['/', 'get', 'IndexController@index'],
-    ['/authenticate', 'post', 'IndexController@authenticate'],
+    ['/login', 'get', 'IndexController@login'],
 ];

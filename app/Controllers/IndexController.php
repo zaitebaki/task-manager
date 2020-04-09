@@ -10,4 +10,9 @@ class IndexController extends Controller
     {
         return $this->view('index');
     }
+
+    public function login(): string
+    {
+        return $this->view('login');
+    }
 }

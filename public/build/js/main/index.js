@@ -118,7 +118,18 @@ eval("\n\n__webpack_require__(/*! core-js/es6 */ \"../node_modules/core-js/es6/i
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n/* harmony default export */ __webpack_exports__[\"default\"] = ({});\n\n//# sourceURL=webpack:///./js/main/components/login-component/_LoginComponent.vue?../node_modules/babel-loader/lib??ref--0!../node_modules/vue-loader/lib??vue-loader-options");
+eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n/* harmony default export */ __webpack_exports__[\"default\"] = ({});\n\n//# sourceURL=webpack:///./js/main/components/login-component/_LoginComponent.vue?../node_modules/babel-loader/lib??ref--0!../node_modules/vue-loader/lib??vue-loader-options");
+
+/***/ }),
+
+/***/ "../node_modules/bootstrap/dist/css/bootstrap.css":
+/*!********************************************************!*\
+  !*** ../node_modules/bootstrap/dist/css/bootstrap.css ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///../node_modules/bootstrap/dist/css/bootstrap.css?");
 
 /***/ }),
 
@@ -3606,7 +3617,7 @@ eval("/* WEBPACK VAR INJECTION */(function(global) {var scope = typeof global !=
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\"div\", [_vm._v(\"Hello from component vue\")])\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./js/main/components/login-component/_LoginComponent.vue?../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../node_modules/vue-loader/lib??vue-loader-options");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _vm._m(0)\n}\nvar staticRenderFns = [\n  function() {\n    var _vm = this\n    var _h = _vm.$createElement\n    var _c = _vm._self._c || _h\n    return _c(\"div\", { staticClass: \"container\" }, [\n      _c(\"div\", { staticClass: \"row justify-content-md-center\" }, [\n        _c(\"div\", { staticClass: \"col-md-6 py-5\" }, [\n          _c(\"p\", { staticClass: \"font-weight-bold\" }, [\n            _vm._v(\"\\n        Вход для администратора\\n      \")\n          ]),\n          _vm._v(\" \"),\n          _c(\"hr\"),\n          _vm._v(\" \"),\n          _c(\"form\", [\n            _c(\"div\", { staticClass: \"form-group\" }, [\n              _c(\"label\", { attrs: { for: \"exampleInputEmail1\" } }, [\n                _vm._v(\"Логин\")\n              ]),\n              _vm._v(\" \"),\n              _c(\"input\", {\n                staticClass: \"form-control\",\n                attrs: {\n                  id: \"inputLogin\",\n                  type: \"text\",\n                  \"aria-describedby\": \"введите логин\",\n                  placeholder: \"введите логин\"\n                }\n              }),\n              _vm._v(\" \"),\n              _c(\n                \"small\",\n                {\n                  staticClass: \"form-text text-muted\",\n                  attrs: { id: \"emailHelp\" }\n                },\n                [_vm._v(\"Неправильно введен логи или пароль\")]\n              )\n            ]),\n            _vm._v(\" \"),\n            _c(\"div\", { staticClass: \"form-group\" }, [\n              _c(\"label\", { attrs: { for: \"exampleInputPassword1\" } }, [\n                _vm._v(\"Пароль\")\n              ]),\n              _vm._v(\" \"),\n              _c(\"input\", {\n                staticClass: \"form-control\",\n                attrs: { id: \"inputPassword\", type: \"password\" }\n              })\n            ]),\n            _vm._v(\" \"),\n            _c(\n              \"button\",\n              { staticClass: \"btn btn-primary\", attrs: { type: \"submit\" } },\n              [_vm._v(\"\\n          Войти\\n        \")]\n            )\n          ])\n        ])\n      ])\n    ])\n  }\n]\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./js/main/components/login-component/_LoginComponent.vue?../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 
@@ -3695,10 +3706,11 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _nod
 /*!**************************!*\
   !*** ./js/main/index.js ***!
   \**************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("console.log(\"Hello from js\");\nwindow.Vue = __webpack_require__(/*! vue */ \"../node_modules/vue/dist/vue.js\");\nVue.component('login-component', __webpack_require__(/*! ./components/login-component/_LoginComponent.vue */ \"./js/main/components/login-component/_LoginComponent.vue\")[\"default\"]);\nvar app = new Vue({\n  el: '#app'\n});\n\n//# sourceURL=webpack:///./js/main/index.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var bootstrap_dist_css_bootstrap_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.css */ \"../node_modules/bootstrap/dist/css/bootstrap.css\");\n/* harmony import */ var bootstrap_dist_css_bootstrap_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_css_bootstrap_css__WEBPACK_IMPORTED_MODULE_0__);\n\nwindow.Vue = __webpack_require__(/*! vue */ \"../node_modules/vue/dist/vue.js\");\nVue.component('login-component', __webpack_require__(/*! ./components/login-component/_LoginComponent.vue */ \"./js/main/components/login-component/_LoginComponent.vue\")[\"default\"]);\nvar app = new Vue({\n  el: '#app'\n});\n\n//# sourceURL=webpack:///./js/main/index.js?");
 
 /***/ }),
 

@@ -1,5 +1,4 @@
-console.log("Hello from js");
-
+import 'bootstrap/dist/css/bootstrap.css'
 window.Vue = require('vue');
 
 Vue.component(
