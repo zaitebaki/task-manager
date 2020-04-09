@@ -15,7 +15,7 @@ class Route
         $this->requestMethod = mb_strtolower($_SERVER['REQUEST_METHOD']);
         $this->requestUri    = mb_strtolower($_SERVER['REQUEST_URI']);
 
-        $this->routes            = require_once '../routes.php';
+        $this->routes            = require_once '../routes/routes.php';
         $this->routesForChecking = $this->getRoutesForChecking();
     }
 
