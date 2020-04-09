@@ -8,7 +8,11 @@ class IndexController extends Controller
 {
     public function index(): string
     {
-        return $this->view('index');
+        $propsData = [
+            ['test' => 'test from php']
+        ];
+        
+        return $this->view('index', ['propsData' => $propsData]);
     }
 
     public function login(): string

@@ -23,6 +23,15 @@ export default {
     'sort-block-component': SortBlockComponent,
     'pagination-component': PaginationComponent
   },
+props: {
+        propsData: {
+      type: Array,
+      default: () => [],
+        },
+    },
+  mounted() {
+      console.log(this.propsData);
+  },
 }
 </script>
 
