@@ -1,5 +1,4 @@
 const _ = require('lodash');
-const webpackHotConfig = require('./webpack.hot.config.js');
 const webpackDevConfig = require('./webpack.dev.config.js');
 const webpackBuildConfig = require('./webpack.build.config.js');
 
@@ -18,9 +17,9 @@ module.exports = () => {
   let webpackConfig;
 
   // "горячая" сборка - Hot Module Replacement
-  if (currentMode === 'hot') {
-    webpackConfig = webpackHotConfig;
-  }
+  // if (currentMode === 'hot') {
+  //   webpackConfig = webpackHotConfig;
+  // }
 
   // итоговая сборка - удобочитаемый вариант
   if (currentMode === 'dev') {

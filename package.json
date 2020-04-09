@@ -36,7 +36,7 @@
   },
   "scripts": {
     "test": "test",
-    "hot": "webpack-dev-server --open",
+    "dev": "webpack --watch --display-modules --mode development",
     "build": "webpack --mode production",
     "dev-detail": "webpack --mode development --profile"
   },
