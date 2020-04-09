@@ -17,7 +17,7 @@ class Task extends Model
     /**
      * Get tasks data from db.
      *
-     * @return mixed
+     * @return array
      */
     public function getTasks(int $pageNumber): array
     {

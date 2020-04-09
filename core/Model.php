@@ -23,10 +23,8 @@ abstract class Model
      * Raw sql query.
      *
      * @param string $string
-     *
-     * @return \mysqli_result
      */
-    protected function sqlQuery(string $string): \mysqli_result
+    protected function sqlQuery(string $string)
     {
         return $this->conn->query($string);
     }
@@ -44,7 +42,7 @@ abstract class Model
         $dbname     = "zaitebaki";
 
         $conn = new \mysqli($serverName, $username, $password, $dbname);
-        
+
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
