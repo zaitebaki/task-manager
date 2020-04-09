@@ -7,6 +7,12 @@ Vue.component(
       .default
   );
 
+  Vue.component(
+    'main-component',
+    require('./components/main-component/_MainComponent.vue')
+      .default
+  );
+
 const app = new Vue({
     el: '#app',
   });
