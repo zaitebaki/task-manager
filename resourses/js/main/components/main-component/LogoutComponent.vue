@@ -29,7 +29,7 @@
 export default {
     data: function() {
     return {
-        formRoute: "http://task-manager.devmasta.ru.com/logout"
+        formRoute: "http://manager.devmasta.ru.com/logout"
     }
   },
 }

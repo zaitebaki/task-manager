@@ -54,7 +54,7 @@
 export default {
   data: function() {
     return {
-        formRoute: "http://task-manager.devmasta.ru.com/add_task"
+        formRoute: "http://manager.devmasta.ru.com/add_task"
       };
   },
 }
