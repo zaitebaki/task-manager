@@ -87,7 +87,7 @@ export default {
   },
     data: function() {
     return {
-        formRoute: "http://task/edit/" + this.propsData.pageNumber
+        formRoute: "http://task-manager.devmasta.ru.com/edit/" + this.propsData.pageNumber
     }
   },
   mounted() {

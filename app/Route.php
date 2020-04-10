@@ -28,7 +28,7 @@ class Route
         $outputControllerName   = null;
         $outputDynamicParameter = null;
 
-        // get last uri piece: http://task/edit => edit
+        // get last uri piece: http://task-manager.devmasta.ru.com/edit => edit
         $pos              = strripos($this->requestUri, '/');
         $cutClientUrl     = substr($this->requestUri, 0, $pos);
         $dynamicParameter = substr($this->requestUri, $pos + 1);

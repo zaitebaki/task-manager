@@ -49,7 +49,7 @@ class User extends Model
     public static function logout()
     {
         session_destroy();
-        header("Location: http://task");
+        header("Location: http://task-manager.devmasta.ru.com");
         exit(0);
     }
 
@@ -78,12 +78,12 @@ class User extends Model
             $_SESSION["success"]      = "Новая задача успешно добавлена!";
             $_SESSION["successCount"] = 1;
             $_SESSION["orderSort"]    = "default";
-            header("Location: http://task/page/$countPages");
+            header("Location: http://task-manager.devmasta.ru.com/page/$countPages");
             exit(0);
         } else {
             $_SESSION["errorQuery"]      = "Возникла ошибка при добавлении задачи. Повторите попытку.";
             $_SESSION["errorQueryCount"] = 1;
-            header("Location: http://task");
+            header("Location: http://task-manager.devmasta.ru.com");
             exit(0);
         }
     }
@@ -121,12 +121,12 @@ class User extends Model
         if ($sql === true) {
             $_SESSION["success"]      = "Задача успешно обновлена!";
             $_SESSION["successCount"] = 1;
-            header("Location: http://task");
+            header("Location: http://task-manager.devmasta.ru.com");
             exit(0);
         } else {
             $_SESSION["errorQuery"]      = "Возникла ошибка при обновлении задачи.";
             $_SESSION["errorQueryCount"] = 1;
-            header("Location: http://task");
+            header("Location: http://task-manager.devmasta.ru.com");
             exit(0);
         }
     }

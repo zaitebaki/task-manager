@@ -61,7 +61,7 @@ export default {
   },
   data() {
     return {
-      pageLink: "http://task/page/"
+      pageLink: "http://task-manager.devmasta.ru.com/page/"
     };
   },
   computed: {

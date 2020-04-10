@@ -1,7 +1,7 @@
 <template>
   <div class="py-4">
     <a
-      href="http://task/login"
+      href="http://task-manager.devmasta.ru.com/login"
       class="text-monospace"
     >Войти с правами администратора</a>
     <hr>

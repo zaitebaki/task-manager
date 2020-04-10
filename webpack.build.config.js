@@ -7,12 +7,6 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
   optimization: {
-    // splitChunks: {
-    //   chunks: 'all',
-    //   minSize: 1,
-    //   minChunks: 2,
-    //   name: 'common-chunk',
-    // },
     minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
   },
   // точки входа

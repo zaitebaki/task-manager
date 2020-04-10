@@ -65,7 +65,7 @@ export default {
 
   methods: {
     getEditLink(id) {
-      return "http://task/edit/" + id;
+      return "http://task-manager.devmasta.ru.com/edit/" + id;
     }
   }
 }
