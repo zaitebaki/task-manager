@@ -6,20 +6,22 @@
           Вход для администратора
         </p>
         <hr>
-        <form>
+        <form
+          id="loginForm"
+          method="post"
+          :action="formRoute"
+        >
           <div class="form-group">
             <label for="exampleInputEmail1">Логин</label>
             <input
               id="inputLogin"
               type="text"
               class="form-control"
+              name="login"
               aria-describedby="введите логин"
               placeholder="введите логин"
+              required
             >
-            <small
-              id="emailHelp"
-              class="form-text text-muted"
-            >Неправильно введен логи или пароль</small>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Пароль</label>
@@ -27,7 +29,15 @@
               id="inputPassword"
               type="password"
               class="form-control"
+              placeholder="введите пароль"
+              name="password"
+              required
             >
+            <small
+              v-if="propsData.error"
+              id="emailHelp"
+              class="form-text text-danger"
+            >{{ propsData.error }}</small>
           </div>
 
           <button
@@ -44,7 +54,20 @@
 
 <script>
 export default {
-
+  props: {
+    propsData: {
+      type: Object,
+      default: () => [],
+    },
+  },
+    data: function() {
+    return {
+        formRoute: "http://task-manager.devmasta.ru.com/login"
+    }
+  },
+  mounted() {
+    console.log(this.propsData);
+  }
 }
 </script>
 

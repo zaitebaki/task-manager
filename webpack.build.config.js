@@ -3,15 +3,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
   optimization: {
-    splitChunks: {
-      chunks: 'all',
-      minSize: 1,
-      minChunks: 2,
-      name: 'common-chunk',
-    },
     minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
   },
   // точки входа
@@ -20,8 +15,8 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve(__dirname, 'public/build'),
-    filename: 'js/[name]/index.js',
+    path: path.resolve(__dirname, 'public'),
+    filename: 'build/js/[name]/index.js',
 
     // интернет-путь
     publicPath: '/',
@@ -96,12 +91,21 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.vue$/,
+        use: 'vue-loader'
+      },
     ],
   },
-
+  resolve: {
+    alias: {
+        'vue': 'vue/dist/vue.js'
+    }
+  },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/[name]/style.[contenthash:6].css',
+      filename: 'css/[name]/style.css',
     }),
+    new VueLoaderPlugin()
   ],
 };

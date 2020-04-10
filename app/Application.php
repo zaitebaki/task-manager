@@ -7,20 +7,22 @@ use Core\Controller;
 class Application
 {
     /**
-     * Отправить ответ сервера
+     * Send server response.
      */
     public function sendResponse(): void
     {
         $route          = new Route();
-        $controllerName = $route->getControllerName();
+        $controllerData = $route->getControllerData();
 
-        // отправить ошибку 404, если для текущего URI
-        // контроллер не задан
+        $controllerName = $controllerData['controllerName'];
+        $parameter      = $controllerData['parameter'];
+
+        //send 4o4 error
         if ($controllerName === null) {
             Controller::abort(404);
         }
 
-        // получить имя класса и метода контроллера
+        // get class name and controller's method name
         $pizza     = \explode('@', $controllerName);
         $className = $pizza[0];
         $method    = $pizza[1];
@@ -28,7 +30,11 @@ class Application
         $fullClassName = "App\\Controllers\\$className";
         $controller    = new $fullClassName();
 
-        $response = $controller->$method();
+        if ($parameter !== null) {
+            $response = $controller->$method($parameter);
+        } else {
+            $response = $controller->$method();
+        }
 
         echo $response;
     }

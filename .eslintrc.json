@@ -8,8 +8,8 @@
       "parser": "babel-eslint"
   },
   "extends": [
-    // "wesbos",
-    "plugin:vue/recommended"
+    "wesbos",
+    // "plugin:vue/recommended"
   ],
   "rules": {
     "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
