@@ -22,9 +22,7 @@ class Task extends Model
     public function getTasks(int $pageNumber): array
     {
         $startOffset = ($pageNumber - 1) * 3;
-        $endOffset   = $startOffset + 3;
-
-        $orderBy = "created_at";
+        $orderBy     = "created_at";
 
         if (isset($_SESSION['orderSort'])) {
             switch ($_SESSION['orderSort']) {
@@ -42,7 +40,7 @@ class Task extends Model
                     break;
             }
         }
-        $sql = $this->sqlQuery("SELECT * FROM tasks order by $orderBy LIMIT $startOffset, $endOffset");
+        $sql = $this->sqlQuery("SELECT * FROM tasks order by $orderBy LIMIT $startOffset, 3");
 
         $resultArray = [];
         if ($sql->num_rows > 0) {

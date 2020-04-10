@@ -25,12 +25,13 @@
                 class="badge badge-pill badge-warning"
               >В очереди</span>
               <span
-                v-if="task.edited === '0'"
+                v-if="task.edited === '1'"
                 class="badge badge-pill badge-danger"
               >Отредактировано администратором</span>
             </p>
             <a
-              href="#"
+              v-if="isAuth"
+              :href="getEditLink(index)"
               class="btn btn-primary"
             >Редактировать</a>
           </div>
@@ -43,15 +44,28 @@
 export default {
 
   props: {
-
     tasks: {
       type: Array,
       default: () => [],
       },
+    isAuth: {
+      type: Boolean,
+      default: false,
+      },
+    pageNumber: {
+      type: Number,
+      default: 0,
+    },
   },
   mounted() {
       console.log(this.tasks.length);
   },
+
+  methods: {
+    getEditLink(index) {
+      return "http://task/edit_task/" + (this.pageNumber * 3 + index);
+    }
+  }
 }
 </script>
 

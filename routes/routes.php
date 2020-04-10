@@ -8,7 +8,7 @@ $routes = [
     ['/login', 'get', 'IndexController@login'],
     ['/login', 'post', 'IndexController@authenticate'],
     ['/logout', 'post', 'IndexController@logout'],
-
-    // ['/edit_task/{id_task}', 'get', 'IndexController@index'],
-    
+    ['/add_task', 'post', 'IndexController@add'],
+    ['/edit_task/{id_task}', 'get', 'IndexController@edit'],
+    ['/edit_task/{id_task}', 'post', 'IndexController@post_edit'],
 ];

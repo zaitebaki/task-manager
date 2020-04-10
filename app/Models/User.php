@@ -52,4 +52,39 @@ class User extends Model
         header("Location: http://task");
         exit(0);
     }
+
+    /**
+     * Add new task.
+     */
+    public function addTask($name, $email, $text)
+    {
+
+        $sqlString = <<<EOD
+        INSERT INTO tasks (user_name, email, text)
+        VALUES ('$name', '$email', '$text')
+        EOD;
+
+        $sql = $this->sqlQuery($sqlString);
+
+        $task       = new Task;
+        $countPages = ($task->getCountTasks() + 2) / 3;
+        $countPages = (int) round($countPages, PHP_ROUND_HALF_DOWN);
+
+        if ($countPages === 0) {
+            $countPages = 1;
+        }
+
+        if ($sql === true) {
+            $_SESSION["success"]      = "Новая задача успешно добавлена!";
+            $_SESSION["successCount"] = 1;
+            $_SESSION["orderSort"]    = "default";
+            header("Location: http://task/page/$countPages");
+            exit(0);
+        } else {
+            $_SESSION["errorQuery"]      = "Возникла ошибка при добавлении задачи. Повторите попытку.";
+            $_SESSION["errorQueryCount"] = 1;
+            header("Location: http://task");
+            exit(0);
+        }
+    }
 }

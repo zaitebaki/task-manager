@@ -22,11 +22,12 @@ class IndexController extends Controller
         $task      = new Task;
         $propsData = [
             [
-                'tasks'      => $task->getTasks((int) $pageNumber),
-                'countTasks' => $task->getCountTasks(),
-                'pageNumber' => $pageNumber,
-                'orderSort'  => $this->getOrderSort(),
-                'isAuth'     => User::isAuthenticate(),
+                'tasks'         => $task->getTasks((int) $pageNumber),
+                'countTasks'    => $task->getCountTasks(),
+                'pageNumber'    => $pageNumber,
+                'orderSort'     => $this->getOrderSort(),
+                'isAuth'        => User::isAuthenticate(),
+                'sessionStatus' => $this->getSessionStatus(),
             ],
         ];
 
@@ -63,30 +64,42 @@ class IndexController extends Controller
      */
     public function authenticate(): string
     {
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $user = new User;
+        $user = new User;
 
-            $login    = $this->testInput($_POST["login"]);
-            $password = $this->testInput($_POST["password"]);
+        $login    = $this->testInput($_POST["login"]);
+        $password = $this->testInput($_POST["password"]);
 
-            if ($login === '' || $password === '') {
-                $_SESSION["error"] = "Поля логин или пароль не заполнены!";
-                header("Location: http://task/login");
-                exit(0);
-            }
-
-            $result = $user->authenticate($login, $password);
-
-            if ($result === true) {
-                header("Location: http://task");
-                unset($_SESSION["error"]);
-                exit(0);
-            } else {
-                $_SESSION["error"] = "Неверно введен логин или пароль!";
-                header("Location: http://task/login");
-                exit(0);
-            }
+        if ($login === '' || $password === '') {
+            $_SESSION["error"] = "Поля логин или пароль не заполнены!";
+            header("Location: http://task/login");
+            exit(0);
         }
+
+        $result = $user->authenticate($login, $password);
+
+        if ($result === true) {
+            header("Location: http://task");
+            unset($_SESSION["error"]);
+            exit(0);
+        } else {
+            $_SESSION["error"] = "Неверно введен логин или пароль!";
+            header("Location: http://task/login");
+            exit(0);
+        }
+    }
+
+    /**
+     * Add new task.
+     */
+    public function add()
+    {
+        $user = new User;
+
+        $name  = $this->testInput($_POST["name"]);
+        $email = $this->testInput($_POST["email"]);
+        $text  = $this->testInput($_POST["text"]);
+
+        $user->addTask($name, $email, $text);
     }
 
     /**
@@ -117,5 +130,37 @@ class IndexController extends Controller
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
         return $data;
+    }
+
+    /**
+     * Get session status.
+     * @param string $data
+     * @return array|bool
+     */
+    private function getSessionStatus()
+    {
+        $resultArray = [];
+
+        if (isset($_SESSION["success"])) {
+
+            $count = $_SESSION["successCount"];
+            if ($count === 1) {
+                $resultArray["success"] = $_SESSION["success"];
+            }
+            $_SESSION["successCount"] = ++$count;
+        }
+
+        if (isset($_SESSION["errorQuery"])) {
+            $count = $_SESSION["errorQueryCount"];
+            if ($count === 1) {
+                $resultArray["error"] = $_SESSION["errorQuery"];
+            }
+            $_SESSION["errorQueryCount"] = ++$count;
+        }
+
+        if (count($resultArray) === 0) {
+            return false;
+        }
+        return $resultArray;
     }
 }
