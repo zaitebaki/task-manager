@@ -71,19 +71,19 @@ class IndexController extends Controller
 
         if ($login === '' || $password === '') {
             $_SESSION["error"] = "Поля логин или пароль не заполнены!";
-            header("Location: http://task-manager.devmasta.ru.com/login");
+            header("Location: http://manager.devmasta.ru.com/login");
             exit(0);
         }
 
         $result = $user->authenticate($login, $password);
 
         if ($result === true) {
-            header("Location: http://task-manager.devmasta.ru.com");
+            header("Location: http://manager.devmasta.ru.com");
             unset($_SESSION["error"]);
             exit(0);
         } else {
             $_SESSION["error"] = "Неверно введен логин или пароль!";
-            header("Location: http://task-manager.devmasta.ru.com/login");
+            header("Location: http://manager.devmasta.ru.com/login");
             exit(0);
         }
     }

@@ -62,7 +62,7 @@ export default {
   },
     data: function() {
     return {
-        formRoute: "http://task-manager.devmasta.ru.com/login"
+        formRoute: "http://manager.devmasta.ru.com/login"
     }
   },
   mounted() {
