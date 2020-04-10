@@ -87,4 +87,77 @@ class User extends Model
             exit(0);
         }
     }
+
+    /**
+     * Update task.
+     * @param string $id
+     * @param string $name
+     * @param string $email
+     * @param string $text
+     * @param int $done
+     */
+    public function updateTask($id, $name, $email, $text, $done)
+    {
+        $edited = $this->isUpdated($id, $name, $email, $text);
+
+        if ($edited === true) {
+            $edited = '1';
+        } else {
+            $edited = '0';
+        }
+
+        $sqlString = <<<EOD
+        UPDATE tasks SET
+            user_name='$name',
+            email='$email',
+            text='$text',
+            done='$done',
+            edited='$edited'
+        WHERE id='$id'
+        EOD;
+
+        $sql = $this->sqlQuery($sqlString);
+
+        if ($sql === true) {
+            $_SESSION["success"]      = "Задача успешно обновлена!";
+            $_SESSION["successCount"] = 1;
+            header("Location: http://task");
+            exit(0);
+        } else {
+            $_SESSION["errorQuery"]      = "Возникла ошибка при обновлении задачи.";
+            $_SESSION["errorQueryCount"] = 1;
+            header("Location: http://task");
+            exit(0);
+        }
+    }
+
+    /**
+     * Check form data for updates.
+     * @param string $name
+     * @param string $name
+     * @param string $email
+     * @param string $text
+     * @return bool
+     */
+    private function isUpdated($id, $name, $email, $text): bool
+    {
+        $sql = $this->sqlQuery("SELECT edited FROM tasks where id = '$id'");
+
+        if ($sql->num_rows > 0) {
+            while ($row = $sql->fetch_assoc()) {
+                $resultArray[] = [
+                    'edited' => $row['edited'],
+                ];
+            }
+        }
+
+        if ($resultArray[0]['edited'] === 1) {
+            return false;
+        }
+
+        if ($_SESSION['editName'] !== $name || $_SESSION['email'] !== $email || $_SESSION['text'] !== $text) {
+            return true;
+        }
+        return false;
+    }
 }

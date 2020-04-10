@@ -9,7 +9,11 @@
         <div class="card">
           <div class="card-header">
             Автор: {{ task.user_name }}
-            <h6 class="card-subtitle mb-2 text-muted" />{{ task.email }}</h6>
+            <div class="py-2">
+              <p class="card-subtitle mb-2 text-muted">
+                {{ task.email }}
+              </p>
+            </div>
           </div>
           <div class="card-body">
             <p class="card-text">
@@ -31,7 +35,7 @@
             </p>
             <a
               v-if="isAuth"
-              :href="getEditLink(index)"
+              :href="getEditLink(task.id)"
               class="btn btn-primary"
             >Редактировать</a>
           </div>
@@ -62,13 +66,12 @@ export default {
   },
 
   methods: {
-    getEditLink(index) {
-      return "http://task/edit_task/" + (this.pageNumber * 3 + index);
+    getEditLink(id) {
+      return "http://task/edit/" + id;
     }
   }
 }
 </script>
 
 <style>
-
 </style>

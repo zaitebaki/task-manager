@@ -9,12 +9,12 @@ use Core\Controller;
 class IndexController extends Controller
 {
     /**
-     * Index controller.
+     * Handle get and post query for '/'
+     * @param string $pageNumber
      * @return string
      */
     public function index($pageNumber = '1'): string
     {
-
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->updateSortStatus();
         }
@@ -35,7 +35,7 @@ class IndexController extends Controller
     }
 
     /**
-     * Login controller.
+     * Handle get query for '/login'
      * @return string
      */
     public function login(): string
@@ -50,7 +50,7 @@ class IndexController extends Controller
     }
 
     /**
-     * Logout controller.
+     * Handle post query for '/logout'
      * @return string
      */
     public function logout(): strings
@@ -59,7 +59,7 @@ class IndexController extends Controller
     }
 
     /**
-     * Authenticate user.
+     * Handle post query for '/login'
      * @return string
      */
     public function authenticate(): string
@@ -89,7 +89,7 @@ class IndexController extends Controller
     }
 
     /**
-     * Add new task.
+     * Handle get query for '/add_task'
      */
     public function add()
     {
@@ -142,7 +142,6 @@ class IndexController extends Controller
         $resultArray = [];
 
         if (isset($_SESSION["success"])) {
-
             $count = $_SESSION["successCount"];
             if ($count === 1) {
                 $resultArray["success"] = $_SESSION["success"];
@@ -162,5 +161,45 @@ class IndexController extends Controller
             return false;
         }
         return $resultArray;
+    }
+
+    /**
+     * Handle get query for '/edit/{id_task}'
+     * @return string
+     */
+    public function edit($pageNumber): string
+    {
+        $task     = new Task;
+        $taskData = $task->getTask($pageNumber);
+        
+        $propsData = [
+            'pageNumber' => $pageNumber,
+            'task'       => $taskData,
+        ];
+
+        $_SESSION['editName'] = $taskData[0]['user_name'];
+        $_SESSION['email']    = $taskData[0]['email'];
+        $_SESSION['text']     = $taskData[0]['text'];
+
+        return $this->view('edit', ['propsData' => $propsData]);
+    }
+
+    /**
+     * Handle post query for '/edit/{id_task}'
+     * @return string
+     */
+    public function postEdit($id): string
+    {
+        $user  = new User;
+        $name  = $this->testInput($_POST["name"]);
+        $email = $this->testInput($_POST["email"]);
+        $text  = $this->testInput($_POST["text"]);
+        $done  = 0;
+
+        if (isset($_POST["done"])) {
+            $done = 1;
+        }
+
+        $user->updateTask($id, $name, $email, $text, $done);
     }
 }
