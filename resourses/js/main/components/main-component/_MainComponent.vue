@@ -61,7 +61,6 @@ props: {
     }
   },
   mounted() {
-      console.log(this.propsData);
   }
 }
 </script>

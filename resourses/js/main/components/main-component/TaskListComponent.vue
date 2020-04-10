@@ -46,7 +46,6 @@
 </template>
 <script>
 export default {
-
   props: {
     tasks: {
       type: Array,
@@ -62,7 +61,6 @@ export default {
     },
   },
   mounted() {
-      console.log(this.tasks.length);
   },
 
   methods: {

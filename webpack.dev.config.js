@@ -1,12 +1,11 @@
 const path = require('path');
-// const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
   watch: true,
-  // точки входа
+
   entry: {
     main: ['@babel/polyfill', './js/main/index.js'],
   },
@@ -127,7 +126,6 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'css/[name]/style.css',
-      // new VueLoaderPlugin()
     }),
     new VueLoaderPlugin()
   ],

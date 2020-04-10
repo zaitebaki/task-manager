@@ -57,7 +57,6 @@ export default {
       };
   },
   mounted() {
-    console.log(this.formRoute);
   },
   methods: {
     onChangeSelectedTask() {

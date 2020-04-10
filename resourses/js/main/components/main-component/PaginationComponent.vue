@@ -70,7 +70,6 @@ export default {
       }
   },
   mounted() {
-    console.log(this.pageCount);
   },
   methods: {
     getLink(index) {

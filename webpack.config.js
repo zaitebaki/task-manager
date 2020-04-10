@@ -3,7 +3,7 @@ const webpackDevConfig = require('./webpack.dev.config.js');
 const webpackBuildConfig = require('./webpack.build.config.js');
 
 const generalConfig = {
-  // абосолютный путь к папке с проектом
+  // абсолютный путь к папке с проектом
   context: `${__dirname}/resourses`,
 
   // при ошибке не собирать сборку
