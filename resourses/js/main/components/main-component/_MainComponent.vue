@@ -4,29 +4,33 @@
       v-if="propsData[0].sessionStatus"
       :session-status="propsData[0].sessionStatus"
     />
-    <logout-component 
+    <logout-component
       v-if="isAuth"
+      :domain="propsData[0].domain"
     />
-    <login-component 
-      v-if="!isAuth"
+    <login-component
+      v-if="!isAuth" 
+      :domain="propsData[0].domain"
     />
-    
+
     <h2>Текущие задачи</h2>
     <hr>
-    <sort-block-component 
-      :order-sort="propsData[0].orderSort"
-    />
+    <sort-block-component :order-sort="propsData[0].orderSort" />
 
     <task-list-component
       :tasks="propsData[0].tasks"
       :is-auth="isAuth"
       :page-number="+propsData[0].pageNumber"
+      :domain="propsData[0].domain"
     />
     <pagination-component
       :count-tasks="propsData[0].countTasks"
       :page-number="+propsData[0].pageNumber"
+      :domain="propsData[0].domain"
     />
-    <add-task-component />
+    <add-task-component 
+      :domain="propsData[0].domain"
+    />
   </div>
 </template>
 
@@ -47,24 +51,21 @@ export default {
     'task-list-component': TaskListComponent,
     'sort-block-component': SortBlockComponent,
     'pagination-component': PaginationComponent,
-    'session-status-component': SessionStatusComponent
+    'session-status-component': SessionStatusComponent,
   },
-props: {
+  props: {
     propsData: {
       type: Array,
       default: () => [],
-        },
     },
-  computed: {
-    isAuth: function () {
-      return this.propsData[0].isAuth;
-    }
   },
-  mounted() {
-  }
-}
+  computed: {
+    isAuth() {
+      return this.propsData[0].isAuth;
+    },
+  },
+  mounted() {},
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

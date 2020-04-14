@@ -45,27 +45,24 @@
 
 <script>
 export default {
-    props: {
+  props: {
     orderSort: {
       type: String,
       default: 'default',
     },
   },
-    data: function() {
+  data() {
     return {
-        formRoute: document.location.href
-      };
+      formRoute: document.location.href,
+    };
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     onChangeSelectedTask() {
-      document.getElementById("sortForm").submit();
-    }
-  }
-}
+      document.getElementById('sortForm').submit();
+    },
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -34,7 +34,7 @@ abstract class Model
      *
      * @return \mysqli
      */
-    private function getDbConnection(): \mysqli
+    protected function getDbConnection(): \mysqli
     {
         $serverName = "localhost";
         $username   = "mysql";

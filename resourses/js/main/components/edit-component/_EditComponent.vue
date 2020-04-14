@@ -85,17 +85,15 @@ export default {
       default: () => [],
     },
   },
-    data: function() {
+  data() {
     return {
-        formRoute: "http://manager.devmasta.ru.com/edit/" + this.propsData.pageNumber
-    }
+      formRoute: `${this.propsData.domain}/edit/${this.propsData.pageNumber}`,
+    };
   },
   mounted() {
     console.log(this.propsData);
-  }
-}
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

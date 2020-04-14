@@ -10,3 +10,8 @@ use App\Application;
 
 $app = new Application;
 $app->sendResponse();
+
+$a = 50;
+$c = 100;
+
+$d = $a + $c;
