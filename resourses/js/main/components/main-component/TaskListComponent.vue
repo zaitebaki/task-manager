@@ -50,26 +50,27 @@ export default {
     tasks: {
       type: Array,
       default: () => [],
-      },
+    },
     isAuth: {
       type: Boolean,
       default: false,
-      },
+    },
     pageNumber: {
       type: Number,
       default: 0,
     },
+    domain: {
+      type: String,
+      default: '',
+    },
   },
-  mounted() {
-  },
-
+  mounted() {},
   methods: {
     getEditLink(id) {
-      return "http://manager.devmasta.ru.com/edit/" + id;
-    }
-  }
-}
+      return this.domain + `/edit/${id}`;
+    },
+  },
+};
 </script>
 
-<style>
-</style>
+<style></style>

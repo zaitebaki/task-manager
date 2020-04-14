@@ -19,14 +19,13 @@
 
 <script>
 export default {
-    props: {
+  props: {
     sessionStatus: {
       type: Object,
       default: () => [],
-        },
     },
-}
+  },
+};
 </script>
 
-<style>
-</style>
+<style></style>

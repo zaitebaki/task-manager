@@ -60,17 +60,13 @@ export default {
       default: () => [],
     },
   },
-    data: function() {
+  data() {
     return {
-        formRoute: "http://manager.devmasta.ru.com/login"
-    }
+      formRoute: `${this.propsData.domain}/login`,
+    };
   },
-  mounted() {
-    console.log(this.propsData);
-  }
-}
+  mounted(fefe) {},
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -22,11 +22,11 @@
         v-for="(page, index) in pageCount"
         :key="index"
         class="page-item"
-        :class="{active: pageNumber === index+1}"
+        :class="{active: pageNumber === index + 1}"
       >
         <a
           class="page-link"
-          :href="getLink(index+1)"
+          :href="getLink(index + 1)"
         >{{ index + 1 }}</a>
       </li>
 
@@ -58,19 +58,22 @@ export default {
       type: Number,
       default: 0,
     },
+    domain: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
-      pageLink: "http://manager.devmasta.ru.com/page/"
+      pageLink: this.domain + '/page/',
     };
   },
   computed: {
-    pageCount: function () {
-        return Math.trunc(this.countTasks / 3) + 1;
-      }
+    pageCount() {
+      return Math.trunc(this.countTasks / 3) + 1;
+    },
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     getLink(index) {
       return this.pageLink + index;
@@ -80,11 +83,9 @@ export default {
     },
     getNextLink() {
       return this.pageLink + (this.pageNumber + 1);
-    }
+    },
   },
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

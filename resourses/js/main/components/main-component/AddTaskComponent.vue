@@ -52,14 +52,18 @@
 
 <script>
 export default {
-  data: function() {
-    return {
-        formRoute: "http://manager.devmasta.ru.com/add_task"
-      };
+  props: {
+    domain: {
+      type: String,
+      default: '',
+    },
   },
-}
+  data() {
+    return {
+      formRoute: this.domain + '/add_task',
+    };
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

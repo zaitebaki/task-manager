@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Task;
 use App\Models\User;
+use Core\Config;
 use Core\Controller;
 
 class IndexController extends Controller
@@ -28,6 +29,7 @@ class IndexController extends Controller
                 'orderSort'     => $this->getOrderSort(),
                 'isAuth'        => User::isAuthenticate(),
                 'sessionStatus' => $this->getSessionStatus(),
+                'domain'        => Config::get('domain'),
             ],
         ];
 
@@ -46,6 +48,7 @@ class IndexController extends Controller
         } else {
             $propsData['error'] = false;
         }
+        $propsData['domain'] = Config::get('domain');
         return $this->view('login', ['propsData' => $propsData]);
     }
 
@@ -71,19 +74,19 @@ class IndexController extends Controller
 
         if ($login === '' || $password === '') {
             $_SESSION["error"] = "Поля логин или пароль не заполнены!";
-            header("Location: http://manager.devmasta.ru.com/login");
+            header("Location: " . Config::get('domain') . "/login");
             exit(0);
         }
 
         $result = $user->authenticate($login, $password);
 
         if ($result === true) {
-            header("Location: http://manager.devmasta.ru.com");
+            header("Location: " . Config::get('domain'));
             unset($_SESSION["error"]);
             exit(0);
         } else {
             $_SESSION["error"] = "Неверно введен логин или пароль!";
-            header("Location: http://manager.devmasta.ru.com/login");
+            header("Location: " . Config::get('domain') . "/login");
             exit(0);
         }
     }
@@ -127,8 +130,6 @@ class IndexController extends Controller
     private function testInput(string $data): string
     {
         $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
         return $data;
     }
 
@@ -169,12 +170,18 @@ class IndexController extends Controller
      */
     public function edit($pageNumber): string
     {
+        if (User::isAuthenticate() !== true) {
+            header("Location: " . Config::get('domain') . "/login");
+            exit(0);
+        }
+
         $task     = new Task;
         $taskData = $task->getTask($pageNumber);
 
         $propsData = [
             'pageNumber' => $pageNumber,
             'task'       => $taskData,
+            'domain'     => Config::get('domain'),
         ];
 
         $_SESSION['editName'] = $taskData[0]['user_name'];
