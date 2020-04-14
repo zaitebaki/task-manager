@@ -27,13 +27,18 @@
 
 <script>
 export default {
-    data: function() {
-    return {
-        formRoute: "http://manager.devmasta.ru.com/logout"
-    }
+  props: {
+    domain: {
+      type: String,
+      default: '',
+    },
   },
-}
+  data() {
+    return {
+      formRoute: this.domain + '/logout',
+    };
+  },
+};
 </script>
 
-<style>
-</style>
+<style></style>

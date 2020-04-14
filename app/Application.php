@@ -17,7 +17,7 @@ class Application
         $controllerName = $controllerData['controllerName'];
         $parameter      = $controllerData['parameter'];
 
-        //send 4o4 error
+        //send 404 error
         if ($controllerName === null) {
             Controller::abort(404);
         }

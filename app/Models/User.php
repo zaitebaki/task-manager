@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Core\Config;
 use Core\Model;
 
 class User extends Model
@@ -48,8 +49,21 @@ class User extends Model
      */
     public static function logout()
     {
+        $_SESSION = array();
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(
+                session_name(),
+                '',
+                time() - 42000,
+                $params["path"],
+                $params["domain"],
+                $params["secure"],
+                $params["httponly"]
+            );
+        }
         session_destroy();
-        header("Location: http://manager.devmasta.ru.com");
+        header("Location: " . Config::get('domain'));
         exit(0);
     }
 
@@ -58,11 +72,14 @@ class User extends Model
      */
     public function addTask($name, $email, $text)
     {
+        $conn = $this->getDbConnection();
 
-        $sqlString = <<<EOD
-        INSERT INTO tasks (user_name, email, text)
-        VALUES ('$name', '$email', '$text')
-        EOD;
+        $name  = $conn->real_escape_string($name);
+        $email = $conn->real_escape_string($email);
+        $text  = $conn->real_escape_string($text);
+
+        $sqlString = "INSERT INTO tasks (user_name, email, text)
+        VALUES ('$name', '$email', '$text')";
 
         $sql = $this->sqlQuery($sqlString);
 
@@ -78,12 +95,12 @@ class User extends Model
             $_SESSION["success"]      = "Новая задача успешно добавлена!";
             $_SESSION["successCount"] = 1;
             $_SESSION["orderSort"]    = "default";
-            header("Location: http://manager.devmasta.ru.com/page/$countPages");
+            header("Location: " . Config::get('domain') . "/page/$countPages");
             exit(0);
         } else {
             $_SESSION["errorQuery"]      = "Возникла ошибка при добавлении задачи. Повторите попытку.";
             $_SESSION["errorQueryCount"] = 1;
-            header("Location: http://manager.devmasta.ru.com");
+            header("Location: " . Config::get['domain']);
             exit(0);
         }
     }
@@ -106,27 +123,26 @@ class User extends Model
             $edited = '0';
         }
 
-        $sqlString = <<<EOD
-        UPDATE tasks SET
+        $sqlString = "UPDATE tasks SET
             user_name='$name',
             email='$email',
             text='$text',
             done='$done',
             edited='$edited'
-        WHERE id='$id'
-        EOD;
+        WHERE id='$id'";
 
         $sql = $this->sqlQuery($sqlString);
 
         if ($sql === true) {
             $_SESSION["success"]      = "Задача успешно обновлена!";
             $_SESSION["successCount"] = 1;
-            header("Location: http://manager.devmasta.ru.com");
+            header("Location: " . Config::get('domain'));
+
             exit(0);
         } else {
             $_SESSION["errorQuery"]      = "Возникла ошибка при обновлении задачи.";
             $_SESSION["errorQueryCount"] = 1;
-            header("Location: http://manager.devmasta.ru.com");
+            header("Location: " . Config::get('domain'));
             exit(0);
         }
     }
@@ -151,8 +167,11 @@ class User extends Model
             }
         }
 
-        if ($resultArray[0]['edited'] === 1) {
-            return false;
+        $t = $resultArray[0]['edited'];
+        $d = 5;
+
+        if ($resultArray[0]['edited'] === '1') {
+            return true;
         }
 
         if ($_SESSION['editName'] !== $name || $_SESSION['email'] !== $email || $_SESSION['text'] !== $text) {
