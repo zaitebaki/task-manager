@@ -34,7 +34,6 @@ class Route
         $dynamicParameter = substr($this->requestUri, $pos + 1);
 
         for ($i = 0, $size = count($checkingArray); $i < $size; ++$i) {
-
             $typeUrl        = $checkingArray[$i]['typeUrl'];
             $url            = $checkingArray[$i]['url'];
             $method         = $checkingArray[$i]['method'];
